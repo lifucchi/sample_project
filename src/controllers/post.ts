@@ -51,7 +51,6 @@ export const deletePosts: RequestHandler = (req,res,next) => {
     .then( resp => {
         res.json(resp.data);
     })
-
 };
 
 export const putPosts: RequestHandler = (req,res,next) => {
