@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { createUser, getUsers, putUsers} from '../controllers/users'
+import { createUser, getUsers, putUser, deleteUser} from '../controllers/users'
 
 const router = Router();
 
@@ -7,11 +7,11 @@ router.get('/', getUsers);
 
 router.post('/', createUser );
 
-router.put('/:id', putUsers);
+router.put('/:id', putUser);
 
 router.patch('/');
 
-router.delete('/');
+router.delete('/:id', deleteUser);
 
 // import axios from 'axios'
 

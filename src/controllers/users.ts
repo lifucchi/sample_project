@@ -40,7 +40,7 @@ export const getUsers: RequestHandler = (req,res,next) => {
 };
 
 
-export const putUsers: RequestHandler = (req,res,next) => {
+export const putUser: RequestHandler = (req,res,next) => {
     const id = req.params.id;
     axios.put(apiUsers + '/'+ id, {
         name: "Rifka",
@@ -52,4 +52,15 @@ export const putUsers: RequestHandler = (req,res,next) => {
     })
 
 };
+
+export const deleteUser: RequestHandler = (req,res,next) => {
+    const id = req.params.id;
+    axios.delete(apiUsers + '/'+ id)
+    .then( resp => {
+        res.json(resp.data);
+    })
+
+};
+
+
 

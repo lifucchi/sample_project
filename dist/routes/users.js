@@ -5,9 +5,9 @@ const users_1 = require("../controllers/users");
 const router = (0, express_1.Router)();
 router.get('/', users_1.getUsers);
 router.post('/', users_1.createUser);
-router.put('/:id', users_1.putUsers);
+router.put('/:id', users_1.putUser);
 router.patch('/');
-router.delete('/');
+router.delete('/:id', users_1.deleteUser);
 // import axios from 'axios'
 // const requestHandler = (req , res) => {
 //     const url = req.url;
