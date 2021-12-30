@@ -4,6 +4,8 @@ import express, {Request, Response, NextFunction} from 'express';
 import userRoutes from './routes/users';
 import postRoutes from './routes/posts';
 import commentRoutes from './routes/comments';
+import photosRoutes from './routes/photos';
+
 
 import { sequelize } from './database/database';
 import { json } from 'body-parser';
@@ -17,6 +19,7 @@ app.use(json());
 app.use('/users', userRoutes );
 app.use('/posts', postRoutes );
 app.use('/comments', commentRoutes );
+app.use('/photos', photosRoutes );
 
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
