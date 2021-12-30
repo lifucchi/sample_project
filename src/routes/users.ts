@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { createUser, getUsers } from '../controllers/users'
+import { createUser, getUsers, putUsers} from '../controllers/users'
 
 const router = Router();
 
@@ -7,7 +7,7 @@ router.get('/', getUsers);
 
 router.post('/', createUser );
 
-router.put('/');
+router.put('/:id', putUsers);
 
 router.patch('/');
 

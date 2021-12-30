@@ -33,8 +33,20 @@ export const createUser: RequestHandler = (req,res,next) => {
 };
 
 export const getUsers: RequestHandler = (req,res,next) => {
-
     axios.get(apiUsers)
+    .then( resp => {
+        res.json(resp.data);
+    })
+};
+
+
+export const putUsers: RequestHandler = (req,res,next) => {
+    const id = req.params.id;
+    axios.put(apiUsers + '/'+ id, {
+        name: "Rifka",
+        email: "Rifka@gmail.com",
+        phone: "081559921412"  
+    })
     .then( resp => {
         res.json(resp.data);
     })

@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getUsers = exports.createUser = void 0;
+exports.putUsers = exports.getUsers = exports.createUser = void 0;
 // import { User } from '../models/users'
 const axios_1 = __importDefault(require("axios"));
 // const USERS: User[] = [];
@@ -38,4 +38,16 @@ const getUsers = (req, res, next) => {
     });
 };
 exports.getUsers = getUsers;
+const putUsers = (req, res, next) => {
+    const id = req.params.id;
+    axios_1.default.put(apiUsers + '/' + id, {
+        name: "Rifka",
+        email: "Rifka@gmail.com",
+        phone: "081559921412"
+    })
+        .then(resp => {
+        res.json(resp.data);
+    });
+};
+exports.putUsers = putUsers;
 //# sourceMappingURL=users.js.map
