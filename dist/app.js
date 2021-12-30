@@ -7,7 +7,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // import http from 'http';
 const express_1 = __importDefault(require("express"));
 const users_1 = __importDefault(require("./routes/users"));
-const posts_1 = __importDefault(require("./routes/posts"));
+const users_2 = __importDefault(require("./routes/users"));
+const database_1 = require("./database/database");
 const body_parser_1 = require("body-parser");
 // const userRoutes = require('./routes/users')
 // const routes = userRoutes;
@@ -16,9 +17,20 @@ const body_parser_1 = require("body-parser");
 const app = (0, express_1.default)();
 app.use((0, body_parser_1.json)());
 app.use('/users', users_1.default);
-app.use('/posts', posts_1.default);
+app.use('/posts', users_2.default);
 app.use((err, req, res, next) => {
     res.status(500).json({ message: err.message });
 });
-app.listen(3000);
+// app.listen(3000);
+database_1.sequelize
+    .sync()
+    // .sync({alter: true})
+    //   .sync({force: true})
+    .then(result => {
+    app.listen(3000);
+})
+    .catch(err => {
+    console.log(err);
+    process.exit(1);
+});
 //# sourceMappingURL=app.js.map

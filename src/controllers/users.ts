@@ -77,5 +77,27 @@ export const patchUser: RequestHandler = (req,res,next) => {
     })
 };
 
+export const saveUserAPI: RequestHandler = (req,res,next) => {
+
+    axios.get(apiUsers)
+    .then( resp => {
+        res.json(resp.data);   
+        var jsondata = resp.data;
+        var values = [];
+        for(var i=0; i< jsondata.length; i++)
+            values.push([
+                 jsondata[i].name,
+                 jsondata[i].username,
+                 jsondata[i].email,
+                 jsondata[i].phone
+                ]);
+        })
+
+        // JSON.stringify(values);
+
+        // console.info(values);
+        // res.json(values);
+
+};
 
 

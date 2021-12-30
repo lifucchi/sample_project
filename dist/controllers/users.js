@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.patchUser = exports.deleteUser = exports.putUser = exports.getUsers = exports.createUser = void 0;
+exports.saveUserAPI = exports.patchUser = exports.deleteUser = exports.putUser = exports.getUsers = exports.createUser = void 0;
 // import { User } from '../models/users'
 const axios_1 = __importDefault(require("axios"));
 // const USERS: User[] = [];
@@ -76,4 +76,23 @@ const patchUser = (req, res, next) => {
     });
 };
 exports.patchUser = patchUser;
+const saveUserAPI = (req, res, next) => {
+    axios_1.default.get(apiUsers)
+        .then(resp => {
+        res.json(resp.data);
+        var jsondata = resp.data;
+        var values = [];
+        for (var i = 0; i < jsondata.length; i++)
+            values.push([
+                jsondata[i].name,
+                jsondata[i].username,
+                jsondata[i].email,
+                jsondata[i].phone
+            ]);
+    });
+    // JSON.stringify(values);
+    // console.info(values);
+    // res.json(values);
+};
+exports.saveUserAPI = saveUserAPI;
 //# sourceMappingURL=users.js.map
