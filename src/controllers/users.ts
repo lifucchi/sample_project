@@ -39,18 +39,19 @@ export const getUsers: RequestHandler = (req,res,next) => {
     })
 };
 
-
 export const putUser: RequestHandler = (req,res,next) => {
+    const name = (req.body as {name: string}).name;
+    const email = (req.body as {email: string}).email;
+    const phone = (req.body as {phone: string}).phone;
     const id = req.params.id;
     axios.put(apiUsers + '/'+ id, {
-        name: "Rifka",
-        email: "Rifka@gmail.com",
-        phone: "081559921412"  
+        name: name,
+        email: email,
+        phone: phone  
     })
     .then( resp => {
         res.json(resp.data);
     })
-
 };
 
 export const deleteUser: RequestHandler = (req,res,next) => {
@@ -59,7 +60,21 @@ export const deleteUser: RequestHandler = (req,res,next) => {
     .then( resp => {
         res.json(resp.data);
     })
+};
 
+export const patchUser: RequestHandler = (req,res,next) => {
+    const name = (req.body as {name: string}).name;
+    // const email = (req.body as {email: string}).email;
+    // const phone = (req.body as {phone: string}).phone;
+    const id = req.params.id;
+    axios.patch(apiUsers + '/'+ id, {
+        name: name
+        // email: email,
+        // phone: phone  
+    })
+    .then( resp => {
+        res.json(resp.data);
+    })
 };
 
 

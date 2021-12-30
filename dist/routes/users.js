@@ -6,7 +6,7 @@ const router = (0, express_1.Router)();
 router.get('/', users_1.getUsers);
 router.post('/', users_1.createUser);
 router.put('/:id', users_1.putUser);
-router.patch('/');
+router.patch('/:id', users_1.patchUser);
 router.delete('/:id', users_1.deleteUser);
 // import axios from 'axios'
 // const requestHandler = (req , res) => {
