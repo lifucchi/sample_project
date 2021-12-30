@@ -3,7 +3,9 @@
 import express, {Request, Response, NextFunction} from 'express';
 import userRoutes from './routes/users';
 import postRoutes from './routes/posts';
-import {sequelize} from './database/database';
+import commentRoutes from './routes/comments';
+
+import { sequelize } from './database/database';
 import { json } from 'body-parser';
 // const userRoutes = require('./routes/users')
 // const routes = userRoutes;
@@ -14,6 +16,7 @@ const app = express();
 app.use(json());
 app.use('/users', userRoutes );
 app.use('/posts', postRoutes );
+app.use('/comments', commentRoutes );
 
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
