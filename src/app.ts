@@ -5,7 +5,7 @@ import userRoutes from './routes/users';
 import postRoutes from './routes/posts';
 import commentRoutes from './routes/comments';
 import photosRoutes from './routes/photos';
-
+import albumRoutes from './routes/albums';
 
 import { sequelize } from './database/database';
 import { json } from 'body-parser';
@@ -20,6 +20,8 @@ app.use('/users', userRoutes );
 app.use('/posts', postRoutes );
 app.use('/comments', commentRoutes );
 app.use('/photos', photosRoutes );
+app.use('/albums', albumRoutes );
+
 
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
