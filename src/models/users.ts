@@ -1,4 +1,3 @@
-
-// export class Users {
-//     constructor(public id: strong, public text: string){}
-// }
+export class User {
+    constructor(public id: string, public text: string){}
+}
