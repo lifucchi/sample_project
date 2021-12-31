@@ -22,11 +22,6 @@ const createUser = (req, res, next) => {
     const name = req.body.name;
     const email = req.body.email;
     const phone = req.body.phone;
-    // axios.post(apiUsers,{
-    //     name: "Rifka",
-    //     email: "Rifka@gmail.com",
-    //     phone: "081559921412"
-    // })
     axios_1.default.post(apiUsers, {
         name: name,
         email: email,
@@ -36,9 +31,6 @@ const createUser = (req, res, next) => {
         console.log(resp.data);
         res.json(resp.data);
     });
-    // const text = (req.body as {text: string}).text;
-    // const newUser = new User(Math.random().toString(), text);
-    // res.status(201).json({message: 'tes', createUser: newUser});
 };
 exports.createUser = createUser;
 const getUsers = (req, res, next) => {
@@ -73,13 +65,9 @@ const deleteUser = (req, res, next) => {
 exports.deleteUser = deleteUser;
 const patchUser = (req, res, next) => {
     const name = req.body.name;
-    // const email = (req.body as {email: string}).email;
-    // const phone = (req.body as {phone: string}).phone;
     const id = req.params.id;
     axios_1.default.patch(apiUsers + '/' + id, {
         name: name
-        // email: email,
-        // phone: phone  
     })
         .then(resp => {
         res.json(resp.data);
@@ -105,12 +93,8 @@ const saveUserAPI = (req, res, next) => {
             }
             yield connection.manager.save(users);
             console.log('User created');
-            // user.save();
         }));
     }).catch(error => console.log(error));
-    // JSON.stringify(values);
-    // console.info(values);
-    // res.json(values);
 };
 exports.saveUserAPI = saveUserAPI;
 //# sourceMappingURL=users.js.map
