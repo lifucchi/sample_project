@@ -23,17 +23,13 @@ app.use('/photos', photosRoutes );
 app.use('/albums', albumRoutes );
 
 
-
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     res.status(500).json({message: err.message});
 })
-
-
 // app.listen(3000);
-
 sequelize
   .sync()
-  // .sync({alter: true})
+// .sync({alter: true})
 //   .sync({force: true})
   .then(result => {
     app.listen(3000);
