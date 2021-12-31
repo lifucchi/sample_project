@@ -12,12 +12,6 @@ export const createUser: RequestHandler = (req,res,next) => {
     const name = (req.body as {name: string}).name;
     const email = (req.body as {email: string}).email;
     const phone = (req.body as {phone: string}).phone;
-
-    // axios.post(apiUsers,{
-    //     name: "Rifka",
-    //     email: "Rifka@gmail.com",
-    //     phone: "081559921412"
-    // })
     axios.post(apiUsers,{
         name: name,
         email: email,
@@ -28,9 +22,6 @@ export const createUser: RequestHandler = (req,res,next) => {
         res.json(resp.data);
 
     })
-    // const text = (req.body as {text: string}).text;
-    // const newUser = new User(Math.random().toString(), text);
-    // res.status(201).json({message: 'tes', createUser: newUser});
 
 };
 
@@ -66,13 +57,9 @@ export const deleteUser: RequestHandler = (req,res,next) => {
 
 export const patchUser: RequestHandler = (req,res,next) => {
     const name = (req.body as {name: string}).name;
-    // const email = (req.body as {email: string}).email;
-    // const phone = (req.body as {phone: string}).phone;
     const id = req.params.id;
     axios.patch(apiUsers + '/'+ id, {
         name: name
-        // email: email,
-        // phone: phone  
     })
     .then( resp => {
         res.json(resp.data);
@@ -85,7 +72,6 @@ export const saveUserAPI: RequestHandler = (req,res,next) => {
     .then( resp => {
         res.json(resp.data);   
         var jsondata = resp.data;
-
         const users: User[] = [];
 
         createConnection().then(async connection => {
@@ -101,23 +87,15 @@ export const saveUserAPI: RequestHandler = (req,res,next) => {
                 console.log(Object.keys(jsondata).length);
                 console.log(jsondata[i].name);
           
-
             }
                  await connection.manager.save(users);
                  console.log('User created');
-                // user.save();
+
                 }
 
             )
-
         
         }).catch(error => console.log(error));
-        
-
-        // JSON.stringify(values);
-
-        // console.info(values);
-        // res.json(values);
 
 };
 
