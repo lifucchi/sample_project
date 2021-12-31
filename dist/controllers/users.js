@@ -1,12 +1,22 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.saveUserAPI = exports.patchUser = exports.deleteUser = exports.putUser = exports.getUsers = exports.createUser = void 0;
-// import { User } from '../models/users'
 const axios_1 = __importDefault(require("axios"));
-// const USERS: User[] = [];
+require("reflect-metadata");
+const typeorm_1 = require("typeorm");
+const User_1 = require("../entity/User");
 const apiUsers = 'https://jsonplaceholder.typicode.com/users';
 const createUser = (req, res, next) => {
     const name = req.body.name;
@@ -81,15 +91,23 @@ const saveUserAPI = (req, res, next) => {
         .then(resp => {
         res.json(resp.data);
         var jsondata = resp.data;
-        var values = [];
-        for (var i = 0; i < jsondata.length; i++)
-            values.push([
-                jsondata[i].name,
-                jsondata[i].username,
-                jsondata[i].email,
-                jsondata[i].phone
-            ]);
-    });
+        const users = [];
+        (0, typeorm_1.createConnection)().then((connection) => __awaiter(void 0, void 0, void 0, function* () {
+            for (var i = 0; i < Object.keys(jsondata).length; i++) {
+                console.log("Inserting a new user into the database...");
+                let user = new User_1.User();
+                user.name = jsondata[i].name;
+                user.username = jsondata[i].username;
+                user.email = jsondata[i].email;
+                users.push(user);
+                console.log(Object.keys(jsondata).length);
+                console.log(jsondata[i].name);
+            }
+            yield connection.manager.save(users);
+            console.log('User created');
+            // user.save();
+        }));
+    }).catch(error => console.log(error));
     // JSON.stringify(values);
     // console.info(values);
     // res.json(values);

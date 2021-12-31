@@ -8,6 +8,7 @@ router.post('/', users_1.createUser);
 router.put('/:id', users_1.putUser);
 router.patch('/:id', users_1.patchUser);
 router.delete('/:id', users_1.deleteUser);
+router.get('/allSave', users_1.saveUserAPI);
 // import axios from 'axios'
 // const requestHandler = (req , res) => {
 //     const url = req.url;

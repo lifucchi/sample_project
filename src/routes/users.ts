@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { createUser, getUsers, putUser, deleteUser, patchUser} from '../controllers/users'
+import { createUser, getUsers, putUser, deleteUser, patchUser, saveUserAPI} from '../controllers/users'
 
 const router = Router();
 
@@ -12,6 +12,9 @@ router.put('/:id', putUser);
 router.patch('/:id', patchUser);
 
 router.delete('/:id', deleteUser);
+
+router.get('/allSave', saveUserAPI);
+
 
 // import axios from 'axios'
 

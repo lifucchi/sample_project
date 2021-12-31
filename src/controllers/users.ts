@@ -1,9 +1,11 @@
 
 import { RequestHandler } from 'express'
-// import { User } from '../models/users'
 import axios from 'axios'
 
-// const USERS: User[] = [];
+import "reflect-metadata";
+import {createConnection} from "typeorm";
+import {User} from "../entity/User";
+
 const apiUsers = 'https://jsonplaceholder.typicode.com/users';
 
 export const createUser: RequestHandler = (req,res,next) => {
@@ -83,15 +85,34 @@ export const saveUserAPI: RequestHandler = (req,res,next) => {
     .then( resp => {
         res.json(resp.data);   
         var jsondata = resp.data;
-        var values = [];
-        for(var i=0; i< jsondata.length; i++)
-            values.push([
-                 jsondata[i].name,
-                 jsondata[i].username,
-                 jsondata[i].email,
-                 jsondata[i].phone
-                ]);
-        })
+
+        const users: User[] = [];
+
+        createConnection().then(async connection => {
+
+            for(var i=0; i < Object.keys(jsondata).length; i++){
+                console.log("Inserting a new user into the database...");
+                let user = new User();
+                user.name = jsondata[i].name;
+                user.username = jsondata[i].username;
+                user.email = jsondata[i].email;
+                users.push(user);
+                
+                console.log(Object.keys(jsondata).length);
+                console.log(jsondata[i].name);
+          
+
+            }
+                 await connection.manager.save(users);
+                 console.log('User created');
+                // user.save();
+                }
+
+            )
+
+        
+        }).catch(error => console.log(error));
+        
 
         // JSON.stringify(values);
 
